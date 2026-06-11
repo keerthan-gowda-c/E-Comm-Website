@@ -1,0 +1,12 @@
+
+
+    <!-- Example Input (add your fields here) -->
+    <div class="mb-3 basic-form-field">
+        <label class="form-label">{{field.label}}</label>
+        
+{{field}}
+        
+        <div class="text-danger small">
+            {{field.errors | striptags}}
+        </div>
+    </div>

@@ -1,0 +1,15 @@
+# Virtual env folder 
+virt/
+
+# Secret environment files
+.env
+
+# Django project folders
+migrations/
+media/
+__pycache__/
+
+*.pyc 
+*.pyo
+
+db.sqlite3

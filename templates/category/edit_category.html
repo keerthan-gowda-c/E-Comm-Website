@@ -1,0 +1,52 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+Edit Category
+{% endblock %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+
+  <div class="card shadow-lg border-0 rounded-4 p-4" style="width: 100%; max-width: 500px;">
+
+    <!-- Header -->
+    <div class="text-center mb-4">
+      <h3 class="fw-bold">Edit Category</h3>
+      <p class="text-muted mb-0">Update your category details</p>
+    </div>
+
+    <!-- Form -->
+    <form method="post">
+      {% csrf_token %}
+
+      <div class="mb-3">
+        {{ form.title.label_tag }}
+        {{ form.title }}
+      </div>
+
+      {% for field in form %}
+        {% if field.name != "title" %}
+          <div class="mb-3">
+            {{ field.label_tag }}
+            {{ field }}
+          </div>
+        {% endif %}
+      {% endfor %}
+
+      <!-- Buttons -->
+      <div class="d-flex gap-2 mt-3">
+        <a href="javascript:history.back()" class="btn btn-light w-50 rounded-pill">
+          Cancel
+        </a>
+
+        <button type="submit" class="btn btn-primary w-50 rounded-pill fw-semibold">
+          Update
+        </button>
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+{% endblock %}

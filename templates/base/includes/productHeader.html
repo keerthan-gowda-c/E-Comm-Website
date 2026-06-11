@@ -1,0 +1,26 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css '%}">
+
+<nav class="navbar " id="second-navbar">
+
+    <div class="container-fluid justify-content-center">
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link"
+                    href="{% url 'product_list' %}">
+                    All
+                </a>
+            </li>
+            {% for category in categories %}
+            <li class="nav-item ">
+                <a class="nav-link second-link 
+{% if request.path == category.get_absolute_url %}active{% endif %}" href="{% url 'category_products' category.pk %}">
+                    {{ category.title }}
+                </a>
+            </li>
+            {% endfor %}
+
+        </ul>
+
+    </div>
+</nav>

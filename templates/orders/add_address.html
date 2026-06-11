@@ -1,0 +1,38 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+Add Address
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="card shadow-sm p-4 mx-auto" style="max-width: 600px;">
+
+        <h4 class="text-center fw-bold mb-4">Add New Address</h4>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <!-- Form Fields -->
+            <div class="mb-3">
+                {{ form.as_p }}
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex justify-content-between mt-4">
+                <a href="{{ request.GET.next|default:'/' }}" class="btn btn-outline-secondary">
+                    Cancel
+                </a>
+
+                <button type="submit" class="btn btn-success px-4">
+                    Save Address
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

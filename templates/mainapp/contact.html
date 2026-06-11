@@ -1,0 +1,68 @@
+{% extends "base/base.html" %}
+
+{% block title %}Contact Us{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4">Get in Touch</h1>
+        <p class="lead">Have questions about our toy cars? We're here to help!</p>
+    </div>
+
+    <div class="row">
+        <!-- Contact Form -->
+        <div class="col-md-7">
+            <div class="card contact-card shadow-sm p-4">
+                <h3 class="mb-4">Send Us a Message</h3>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" name="email" class="form-control" placeholder="Your Email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Subject</label>
+                        <input type="text" name="subject" class="form-control" placeholder="Order / Product Query">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Message</label>
+                        <textarea name="message" rows="5" class="form-control" placeholder="Ask about toy cars, orders, or anything..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="col-md-5 contact-info">
+            <div class="p-4 bg-dark rounded shadow-sm">
+                <h3>Contact Information</h3>
+                <p class="mt-3"><strong>📍 Address:</strong><br>45 Toy Car Lane, Mumbai, India</p>
+                <p><strong>📞 Phone:</strong><br>+91 9741738681</p>
+                <p><strong>📧 Email:</strong><br>support@turbotoys.com</p>
+                <p><strong>⏰ Hours:</strong><br>Mon - Sun: 10 AM - 8 PM</p>
+            </div>
+
+            <div class="mt-4bg-dark text-center text">
+                <h5>Follow Us</h5>
+                <a href="#" class="btn btn-outline-light btn-sm m-1">Facebook</a>
+                <a href="#" class="btn btn-outline-light btn-sm m-1">Instagram</a>
+                <a href="#" class="btn btn-outline-light btn-sm m-1">YouTube</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Map Section -->
+    <div class="mt-5">
+        <h3 class="text-center mb-3">Find Us</h3>
+        <div class="ratio ratio-16x9">
+            <iframe src="https://maps.google.com/maps?q=mumbai&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                    frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+</div>
+{% endblock %}

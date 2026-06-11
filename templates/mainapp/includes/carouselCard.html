@@ -1,0 +1,45 @@
+<div class="col-12 col-sm-6 col-md-4 col-lg-3">
+
+    <div class="card h-100 shadow-sm border-0">
+
+        <!-- HEADER -->
+        <div class="card-body pb-2">
+
+            <div class="d-flex justify-content-between align-items-start">
+
+                <!-- TITLE -->
+                <h6 class="fw-semibold mb-0">
+                    {{ carousel_image.title|title }}
+                </h6>
+
+                <!-- ACTION ICONS -->
+                <div class="d-flex gap-2">
+
+                    <a href="{% url 'edit_carousel' carousel_image.pk %}" class="text-primary" title="Edit">
+                        <i class="bi bi-pencil-fill"></i>
+                    </a>
+
+                    <a href="{% url 'del_carousel' carousel_image.pk %}" class="text-danger" title="Delete">
+                        <i class="bi bi-trash"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- CAPTION -->
+            <p class="card-text text-muted small mt-2 mb-2">
+                {{ carousel_image.caption|truncatechars:80 }}
+            </p>
+
+        </div>
+
+        <!-- IMAGE -->
+        <div class="ratio ratio-16x9">
+            <img src="{{ carousel_image.image.url }}" class="card-img-top object-fit-cover"
+                alt="{{ carousel_image.title }}">
+        </div>
+
+    </div>
+
+</div>

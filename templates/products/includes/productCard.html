@@ -1,0 +1,56 @@
+<div class="product-card card border-0 position-relative overflow-hidden shadow-sm" title="{% if user.is_staff %}Click on the cards to edit {% endif %}" data-product-id="{{product.id}}">
+
+  <!-- Admin buttons -->
+ {% if user.is_staff %}
+  <a href="{% url 'edit_product' product.pk %}"
+    class="btn btn-light btn-sm admin-btn position-absolute top-0 start-0 m-2" title="Edit">
+    <i class="bi bi-pencil-square"></i>
+  </a>
+
+  <a href="{% url 'del_product' product.pk %}" class="btn btn-danger btn-sm admin-btn position-absolute top-0 end-0 m-2"
+    title="Delete">
+    <i class="bi bi-trash"></i>
+  </a>
+  {% endif %}
+
+
+  <!-- Image -->
+  <div class="product-img">
+    <img src="{{ product.thumbnail.url }}" alt="{{ product.title }}">
+  </div>
+
+  <div class="card-body d-flex flex-column">
+
+    <h5 class="card-title">
+      <a href="{% url 'product_details' product.pk %}" class="text-decoration-none text-dark">
+        {{ product.title|title }}
+      </a>
+    </h5>
+
+    <p class="card-text">
+      {{ product.desc|truncatechars:80 }}
+    </p>
+
+    <p class="fw-bold">
+      ₹ {{ product.price }}
+    </p>
+
+    <button
+      class="btn mt-auto add-to-cart product-cart-btn {% if user.is_staff %}disabled btn-secondary{% else %}btn-primary{% endif %}"
+      data-product-id='{{product.id}}'>
+      Add to Cart
+    </button>
+
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.product-card').forEach(card => {
+    card.addEventListener('click', function (e) {
+      // Prevent link clicks from triggering toggle
+      if (e.target.closest('a') || e.target.closest('button')) return;
+
+      this.classList.toggle('active');
+    });
+  });
+</script>

@@ -1,0 +1,48 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+Register
+{% endblock %}
+
+
+{% block content %}
+<section class="vh-100 d-flex align-items-center justify-content-center ">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                <div class="card shadow-lg border-0 rounded-4">
+                    <div class="card-body p-4">
+
+                        <h3 class="text-center mb-4">Create Account</h3>
+
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+
+                            {% for field in form %}
+                                <div class="mb-3">
+                                    {% include 'base/includes/basicFormField.html' %}
+                                </div>
+                            {% endfor %}
+
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-success btn-lg">
+                                    Create Account
+                                </button>
+                            </div>
+
+                            <p class="text-center mt-4 mb-0">
+                                Already have an account?
+                                <a href="{% url 'signin' %}" class="text-decoration-none">
+                                    Sign in
+                                </a>
+                            </p>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

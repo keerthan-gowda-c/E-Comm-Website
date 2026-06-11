@@ -1,0 +1,26 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center min-vh-75 py-5">
+
+    <div class="card shadow text-center p-4" style="max-width: 500px; width: 100%;">
+        
+        <div class="card-body">
+
+            <h1 class="h3 mb-3 text-success">Payment Successful!</h1>
+
+            <p class="fw-bold mb-2">Order #{{ order.id }}</p>
+
+            <p class="mb-4">Thank you for your purchase!</p>
+
+            <a href="{% url 'order_history_2' %}" 
+               class="btn btn-primary w-100">
+               View Your Orders
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

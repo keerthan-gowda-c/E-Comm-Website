@@ -1,0 +1,171 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+{% if user.is_authenticated %}
+{{ user.username }}'s Cart
+{% else %}
+Cart
+{% endif %}
+{% endblock %}
+
+
+{% block content %}
+<section class="container py-5">
+
+    
+
+    {% if user.is_authenticated %}
+
+    {% if cart_items %}
+    <h2 class="fw-bold mb-4 text-center">🛒 Your Cart</h2>
+
+    <div class="row g-4">
+
+        <!-- CART ITEMS -->
+        <div class="col-lg-8">
+            {% for item in cart_items %}
+            <div class=" card border-bottom p-3 mb-3">
+
+    <div class="row align-items-center p-3">
+
+        <!-- IMAGE -->
+        <div class="col-md-2 text-center">
+            <img src="{{ item.product.thumbnail.url }}"
+                 class="img-fluid"
+                 style="max-height:90px; object-fit:contain;">
+        </div>
+
+        <!-- PRODUCT DETAILS -->
+        <div class="col-md-4">
+            <h6 class="fw-semibold mb-1" style="font-size: 15px;">
+                {{ item.product.title }}
+            </h6>
+
+            <div class="text-muted small mb-1">
+                Seller: <span class="text-dark">TurboToys</span>
+            </div>
+
+            <div class="fw-bold" style="font-size: 18px;">
+                ₹{{ item.product.price }}
+            </div>
+
+            <!-- REMOVE BUTTON (like Flipkart link style) -->
+            <form method="post" action="{% url 'update_cart' %}" class="mt-2">
+                {% csrf_token %}
+                <input type="hidden" name="item_id" value="{{ item.id }}">
+                <input type="hidden" name="action" value="remove">
+
+                <button type="submit"
+                        class="btn border rounded p-2 text-danger p-0 small">
+                        <i class="bi bi-trash3"></i>
+                    REMOVE
+                </button>
+            </form>
+        </div>
+
+        <!-- QUANTITY -->
+        <div class="col-md-3 text-center">
+            <div class="d-inline-flex align-items-center  px-2 py-1">
+
+                <form method="post" action="{% url 'update_cart' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="item_id" value="{{ item.id }}">
+                    <input type="hidden" name="action" value="decrease">
+                    <button class="btn btn-sm btn-outline-danger">−</button>
+                </form>
+
+                <span class="px-3 fw-semibold">
+                    {{ item.quantity }}
+                </span>
+
+                <form method="post" action="{% url 'update_cart' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="item_id" value="{{ item.id }}">
+                    <input type="hidden" name="action" value="increase">
+                    <button class="btn btn-sm btn-outline-success">+</button>
+                </form>
+
+            </div>
+        </div>
+
+        <!-- SUBTOTAL -->
+        <div class="col-md-3 text-end">
+            <div class="fw-bold" style="font-size: 18px;">
+                ₹{{ item.sub_total }}
+            </div>
+            <small class="text-success">
+                Free Delivery
+            </small>
+        </div>
+
+    </div>
+
+</div>
+            {% endfor %}
+        </div>
+
+        <!-- SUMMARY -->
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-lg rounded-4 p-4 sticky-top" style="top: 20px;">
+
+                <h5 class="fw-bold mb-3">Order Summary</h5>
+
+                <div class="d-flex justify-content-between mb-2">
+                    <span>Subtotal</span>
+                    <span>₹{{ total_price }}</span>
+                </div>
+
+                <div class="d-flex justify-content-between mb-3">
+                    <span>Delivery</span>
+                    <span class="text-success">Free</span>
+                </div>
+
+                <hr>
+
+                <div class="d-flex justify-content-between fw-bold mb-3">
+                    <span>Total</span>
+                    <span>₹{{ total_price }}</span>
+                </div>
+
+                <a href="{% url 'create_order' %}" class="btn btn-dark w-100 py-2 rounded-3">
+                    Proceed to Checkout
+                </a>
+
+                <a href="{% url 'product_list' %}" class="btn btn-link text-decoration-none mt-2 w-100">
+                    Continue Shopping
+                </a>
+
+            </div>
+        </div>
+
+    </div>
+
+    {% else %}
+
+    <!-- EMPTY CART -->
+   <div class="text-center py-5">
+    <img src="https://cdn-icons-png.flaticon.com/512/11329/11329060.png" 
+         alt="Empty Cart" class="mb-4" style="max-width: 120px;">
+    <h4 class="fw-bold">Nothing here yet</h4>
+    <p class="text-white">Fill your cart with amazing products.</p>
+    <a href="{% url 'product_list' %}" class="btn btn-outline-light px-4 rounded-pill">
+        Continue Shopping
+    </a>
+</div>
+
+    {% endif %}
+
+    {% else %}
+
+    <!-- NOT LOGGED IN -->
+    <div class="text-center py-5">
+        <h4 class="fw-semibold">Please login to view your cart 🔐</h4>
+        <a href="/login/" class="btn btn-dark mt-3 px-4">
+            Login
+        </a>
+    </div>
+
+    {% endif %}
+
+</section>
+{% endblock %}

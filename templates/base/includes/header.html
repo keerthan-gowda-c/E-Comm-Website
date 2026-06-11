@@ -1,0 +1,204 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg bg-body-tertiary" id="main-navbar">
+  <div class="container-fluid">
+    <!-- Brand -->
+
+    <a class="navbar-brand" href="{% url 'home_page' %}"><img src="{%static 'images/Logo.png'%}"
+        style="width: 60px;">TurboToys</a>
+
+    <!-- Toggler -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar Content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <ul class="navbar-nav main-nav-links me-auto mb-2 mb-lg-0">
+
+        <!-- Home -->
+        <li class="nav-item">
+          <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="{% url 'home_page' %}">
+            Home
+          </a>
+        </li>
+
+        <!-- About -->
+        <li class="nav-item">
+          <a class="nav-link {% if request.path == '/about/' %}active{% endif %}" href="{% url 'about_page' %}">
+            About
+          </a>
+        </li>
+
+        <!-- Contact -->
+        <li class="nav-item">
+          <a class="nav-link {% if request.path == '/contact/' %}active{% endif %}" href="{% url 'contact_page' %}">
+            Contact
+          </a>
+        </li>
+
+         <!-- Product Duplicate -->
+
+        <li class="nav-item">
+          <a class="nav-link {% if request.path == '/products/' %}active{% endif %}" href="{% url 'product_list' %}">
+            Product
+          </a>
+        </li>
+      
+
+        <!-- Category -->
+        {% if user.is_staff %}
+        <li class="nav-item">
+          <a class="nav-link {% if request.path == '/Category/' %}active{% endif %}" href="{% url 'category_list' %}">
+            Category
+          </a>
+        </li>
+        {% endif %}
+
+       
+
+
+        <!-- My Cart  -->
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link {% if request.path == '/cart/' %}active{% endif %}" href="{% url 'cart_page' %}"><i
+              class="bi bi-cart3"></i>
+          </a>
+        </li>
+        {% else %}
+         <li class="nav-item">
+          <a class="nav-link {% if request.path == '/cart/' %}active{% endif %}" href="{% url 'signin' %}"><i
+              class="bi bi-cart3"></i>
+          </a>
+        </li>
+        {% endif %}
+
+ {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link {% if request.path == '/orders/history/v2' %}active{% endif %}" href="{% url 'order_history_2' %}">
+             My Orders
+          </a>
+        </li>
+        {% endif %}
+
+
+
+      </ul>
+
+      <!-- Search -->
+      <form class="d-flex search-form" role="search" method='get' action="{% url 'search_view' %}">
+        <input class="form-control me-2" type="search" placeholder="Search Products 🚗" aria-label="Search Produc" name="q" value="{{query}}">
+        <button class="btn btn-outline-success search-button" type="submit">
+         <i class="bi bi-search"></i>
+        </button>
+      </form>
+
+      {% if user.is_staff %}
+      <ul class="navbar-nav menu-button px-5">
+        <!-- Manage (Offcanvas Trigger) -->
+        <li class="nav-item">
+          <a class="nav-link" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"
+            href="#offcanvasRight" role="button" aria-controls="manageOffcanvas">
+            <i class="bi bi-menu-button-wide w-100"></i>
+          </a>
+        </li>
+      </ul>
+
+      {% endif %}
+
+      <div class="dropdown account-dropdown px-5">
+        <button class="btn dropdown-toggle account-btn d-flex align-items-center gap-2" type="button"
+          data-bs-toggle="dropdown">
+
+          <i class="bi bi-person-circle"></i>
+
+          {% if user.is_authenticated %}
+          {{ user.username|capfirst }}
+          {% else %}
+          Accounts
+          {% endif %}
+        </button>
+
+        <ul class="dropdown-menu dropdown-menu-end account-menu">
+
+          {% if user.is_authenticated %}
+          <li class="px-3 py-2 text-secondary small">
+            Signed in as <strong>{{ user.username.capitalize }}</strong>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+
+          <li>
+            <form action="{% url 'logout' %}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="dropdown-item logout-btn">
+                Logout
+              </button>
+            </form>
+          </li>
+
+          {% else %}
+          <li>
+            <a class="dropdown-item" href="{% url 'signin' %}">
+              Login
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="{% url 'signup' %}">
+              Register
+            </a>
+          </li>
+          {% endif %}
+
+        </ul>
+      </div>
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+<!-- Category Navbar -->
+
+
+<!-- Category Navbar ends here -->
+
+<!-- Offcanvas -->
+<div class="offcanvas offcanvas-end text-white" data-bs-scroll="true" tabindex="-1" id="offcanvasRight"
+  aria-labelledby="offcanvasRightLabel" style="background: linear-gradient(135deg, #0a0f2c, #1c1c1c);">
+
+  <!-- Manage Header -->
+
+  <div class="offcanvas-header border-bottom border-secondary">
+    <h5 class="offcanvas-title fw-bold" id="manageOffcanvasLabel">
+      Manage
+    </h5>
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+
+  <!-- Body -->
+  <div class="offcanvas-body">
+    <ul class="list-unstyled">
+
+      <li class="mb-3">
+        <a href="{% url 'product_list' %}" class="text-white text-decoration-none d-block p-2 rounded hover-bg">
+          Product
+        </a>
+      </li>
+
+      <li class="mb-3">
+        <a href="{% url 'carousel_page' %}" class="text-white text-decoration-none d-block p-2 rounded hover-bg">
+          Carousel
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+
+</div>

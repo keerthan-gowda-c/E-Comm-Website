@@ -1,0 +1,75 @@
+{% extends 'base/base.html' %}
+
+
+
+{% block title %}
+
+{{ product.title }}
+
+{% endblock %}
+
+
+{% block content %}
+
+<section id="product-detail-root" class="product-detail container py-5">
+
+    <div class="row g-5 align-items-start">
+
+        <!-- LEFT: IMAGE -->
+        <div class="col-lg-8 product-carousel-in-detail">
+            {% include 'products/includes/productCarousel.html' %}
+        </div>
+
+        <!-- RIGHT: DETAILS -->
+        <div class="col-lg-3">
+
+            <div class="product-detail__info">
+
+                <!-- Title -->
+                <h2 class="product-detail__title">
+                    {{ product.title }}
+                </h2>
+
+                <!-- Price -->
+                <div class="product-detail__price">
+                    ₹ {{ product.price }}
+                </div>
+
+                <!-- Description -->
+                <p class="product-detail__desc">
+                    {{ product.desc}}
+                </p>
+
+                <!-- Actions -->
+                <div class="product-detail__actions d-flex gap-3 mt-4">
+
+                    <button
+                        class="btn mt-auto add-to-cart product-cart-btn {% if user.is_staff %}disabled btn-secondary{% else %}btn-primary{% endif %}"
+                        data-product-id='{{product.id}}'>
+                        Add to Cart
+                    </button>
+
+                    
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% if user.is_staff %}
+<section>
+    <div class="text-center mt-5">
+        <a href="{% url 'add_product_image' product.pk %}" class="btn btn-outline-light px-4 py-2 rounded-3">
+            ➕ Add More Images
+        </a>
+    </div>
+</section>
+{% endif %}
+
+
+{% endblock %}

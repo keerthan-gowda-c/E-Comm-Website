@@ -1,0 +1,33 @@
+{% extends 'base/base.html' %}
+
+
+{% block title %}
+Carousels
+{% endblock%}
+
+{% block content%}
+<link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=queue_play_next" />
+
+<div class="container-fluid pt-5 mt-3">
+
+    <div class="d-flex justify-content-between align-item-center mb-4">
+        <h3 class="fw-bold">Carousel Images</h3>
+
+        <a href="{% url 'add_carousel' %}" class="btn btn-outline-light  add-button">
+            <span class="material-symbols-outlined ">
+                queue_play_next
+            </span></a>
+    </div>
+
+    <div class="row carousel-card gt-4">
+        {% for carousel_image in carousel_images %}
+        {% include 'mainapp/includes/carouselCard.html' %}
+        {% empty %}
+        <p>No Carousel images added yet.</p>
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock%}

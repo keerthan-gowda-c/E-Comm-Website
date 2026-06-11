@@ -1,0 +1,48 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+Edit Product
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="form-section edit-product-form-section">
+  <div class="container">
+
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+
+        <div class="card form-card edit-product-form-card shadow-lg border-0">
+          <div class="card-body p-4">
+
+            <h4 class="text-center mb-4 fw-bold">Add Details</h4>
+
+            <form method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+
+              <!-- Form Fields -->
+              {% for field in form %}
+                {% include 'base/includes/basicFormField.html' %}
+              {% endfor %}
+
+              <!-- Button -->
+              <div class="d-flex mt-3">
+                <button type="submit" class="btn btn-primary btn-sm px-4">
+                  Save
+                </button>
+              </div>
+
+            </form>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}

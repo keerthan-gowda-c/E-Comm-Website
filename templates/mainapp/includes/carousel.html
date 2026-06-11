@@ -1,0 +1,70 @@
+{% load static %}
+
+<div class="hero-carousel">
+
+  <!-- BACKGROUND CAROUSEL -->
+  <div id="carouselExampleCaptions" class="carousel slide carousel-bg" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      {% for carousel_image in carousel_images %}
+      <div class="carousel-item {% if forloop.first %} active {% endif %}">
+        <img src="{{ carousel_image.image.url }}" class="carousel-bg-img">
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- DARK OVERLAY -->
+  <div class="hero-overlay"></div>
+
+  <!-- FIXED CONTENT -->
+  <div class="carousel-hero-content container text-center text-white">
+
+    <!-- TITLE -->
+    <h1 class="mb-3 fw-bold"><img src="{%static 'images/Logo.png'%}" style="width: 300px;"></h1>
+  <p class="mb-5">Mini cars, big adventures!</p>
+
+    <!-- FEATURES -->
+    <div class="row justify-content-center g-4">
+
+      <div class="col-6 col-md-3">
+        <div class="feature-box p-3">
+          <i class="bi bi-car-front fs-2 mb-2"></i>
+          <h6>Huge Collection</h6>
+        <small>Diecast, RC & more</small>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <div class="feature-box p-3">
+          <i class="bi bi-currency-rupee fs-2 mb-2"></i>
+          <h6>Top Quality</h6>
+        <small>Durable & safe toys</small>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <div class="feature-box p-3">
+          <i class="bi bi-shield-check fs-2 mb-2"></i>
+          <h6>Exciting Play</h6>
+        <small>Fun for all ages</small>
+        </div>
+      </div>
+
+      <div class="col-6 col-md-3">
+        <div class="feature-box p-3">
+          <i class="bi bi-lightning-charge fs-2 mb-2"></i>
+          <h6>Fast Delivery</h6>
+        <small>Quick doorstep shipping</small>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- BUTTON -->
+    <a href="{% url 'product_list' %}" class="btn btn-primary mt-5 px-4">
+      Shop Toy Cars
+    </a>
+
+  </div>
+
+</div>

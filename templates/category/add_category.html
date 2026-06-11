@@ -1,0 +1,48 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+Add Category
+{% endblock %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+
+  <div class="card shadow-lg border-0 rounded-4 p-4" style="width: 100%; max-width: 500px;">
+
+    <!-- Header -->
+    <div class="text-center mb-4">
+      <h3 class="fw-bold">Add Category</h3>
+      <p class="text-muted mb-0">Create a new category for your products</p>
+    </div>
+
+    <!-- Form -->
+    <form method="post">
+      {% csrf_token %}
+
+      <div class="mb-3">
+        {{ form.title.label_tag }}
+        {{ form.title }}
+      </div>
+
+      {% for field in form %}
+        {% if field.name != "title" %}
+          <div class="mb-3">
+            {{ field.label_tag }}
+            {{ field }}
+          </div>
+        {% endif %}
+      {% endfor %}
+
+      <!-- Button -->
+      <div class="d-grid mt-3">
+        <button type="submit" class="btn btn-primary rounded-pill py-2 fw-semibold">
+          Save Category
+        </button>
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+Select Address
+{% endblock %}
+
+{% block content %}
+<form method="post">
+
+<div class="container mt-5 w-50">
+    <div class="card shadow-sm p-4">
+        
+        <h4 class="mb-4 text-center fw-bold">Select Delivery Address</h4>
+
+        
+            {% csrf_token %}
+
+            {% if addresses %}
+                <div class="list-group mb-4">
+                    {% for address in addresses %}
+                        <label class="d-flex gap-3 p-3 mb-3 rounded-3 shadow-sm address-box">
+
+    <input class="form-check-input mt-1"
+           type="radio"
+           name="address"
+           value="{{ address.id }}">
+
+    <div>
+        <div class="fw-bold">
+            {{ address.full_name }}
+        </div>
+
+        <div class="text-muted small mt-1">
+            {{ address.address_line1 }},
+            {{ address.city }},
+            {{ address.state }} - {{ address.pincode }}
+        </div>
+    </div>
+
+</label>
+                    {% endfor %}
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <a href="{% url 'add_address' %}?next={{ request.path }}"
+                       class="btn btn-outline-secondary">
+                        + Add New Address
+                    </a>
+
+                    <button type="submit" class="btn btn-primary px-4">
+                        Continue
+                    </button>
+                </div>
+
+            {% else %}
+                <div class="text-center">
+                    <p class="text-muted">No addresses found.</p>
+                    <a href="{% url 'add_address' %}?next={{ request.path }}"
+                       class="btn btn-primary">
+                        Add Address
+                    </a>
+                </div>
+            {% endif %}
+
+        
+
+    </div>
+</div>
+</form>
+{% endblock %}

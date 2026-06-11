@@ -1,0 +1,27 @@
+{% extends 'base/base.html' %}
+
+
+{% block title %}
+Products
+{% endblock%}
+
+{% block content%}
+
+{% include 'base/includes/productHeader.html' %}
+
+<link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=box_add" />
+
+
+<hr>
+{% if user.is_staff %}
+<a href="{% url 'add_product' %}" class="btn add-button btn-outline-light">
+    <span class="material-symbols-outlined">
+        box_add
+    </span></a>
+    {% endif %}
+
+
+{% include 'products/includes/productSection.html' %}
+
+{% endblock%}

@@ -1,0 +1,55 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+Login
+{% endblock %}
+
+{% block content %}
+<section class="vh-100 d-flex align-items-center justify-content-center ">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                <div class="card shadow-lg border-0 rounded-4">
+                    <div class="card-body p-4">
+
+                        <h3 class="text-center mb-4">Login</h3>
+
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+
+                            {% for field in form %}
+                                <div class="mb-3 w-100">
+                                    {% include 'base/includes/basicFormField.html' %}
+                                </div>
+                            {% endfor %}
+
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    Log in
+                                </button>
+                            </div>
+
+                            <div class="mt-4">
+                                <p class="text-center mb-2">
+                                    Don't have an account?
+                                    <a href="{% url 'signup' %}" class="text-decoration-none">
+                                        Sign up
+                                    </a>
+                                </p>
+
+                                <p class="text-center">
+                                    <a href="{% url 'send_otp' %}" class="text-decoration-none">
+                                        Forgot Password?
+                                    </a>
+                                </p>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

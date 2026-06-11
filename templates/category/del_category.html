@@ -1,0 +1,50 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+Delete Category
+{% endblock %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+
+  <div class="card shadow-lg border-0 rounded-4 p-4 text-center" style="max-width: 450px; width: 100%;">
+
+    <!-- Warning Icon -->
+    <div class="mb-3">
+      <div class="bg-danger bg-opacity-10 text-danger rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 60px; height: 60px; font-size: 28px;">
+        ⚠️
+      </div>
+    </div>
+
+    <!-- Title -->
+    <h3 class="fw-bold text-danger">Delete Category</h3>
+
+    <!-- Message -->
+    <p class="text-muted mt-2">
+      Are you sure you want to delete 
+      <span class="fw-semibold text-dark">"{{ category.title }}"</span>?
+    </p>
+
+    <p class="text-danger small mb-4">
+      This action cannot be undone.
+    </p>
+
+    <!-- Actions -->
+    <form method="post">
+      {% csrf_token %}
+
+      <div class="d-flex gap-2">
+        <a href="javascript:history.back()" class="btn btn-light w-50 rounded-pill">
+          Cancel
+        </a>
+
+        <button type="submit" class="btn btn-danger w-50 rounded-pill fw-semibold">
+          Yes, Delete
+        </button>
+      </div>
+    </form>
+
+  </div>
+
+</div>
+{% endblock %}

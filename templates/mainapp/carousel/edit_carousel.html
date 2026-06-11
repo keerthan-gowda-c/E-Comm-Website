@@ -1,0 +1,46 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+Edit Carousel Image
+{% endblock %}
+
+
+{% block content %}
+<section class="py-5 w-50 ">
+  <div class="container">
+
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+
+        <div class="card add-carousel shadow-sm border-0 rounded-4">
+          <div class="card-body p-4">
+
+            <h5 class="mb-4 fw-semibold">Add Details</h5>
+
+            <form method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+
+              <!-- Form Fields -->
+              <div class="mb-3">
+                {{ form.as_p }}
+              </div>
+
+              <!-- Button Row -->
+              <div class="d-flex align-items-center">
+                <button type="submit"
+                        class="btn btn-primary btn-sm px-4">
+                  Save
+                </button>
+              </div>
+
+            </form>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock %}
