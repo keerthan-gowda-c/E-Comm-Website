@@ -67,7 +67,7 @@ class UpdateCartView(View):
         try:
             item = CartItem.objects.get(id=item_id, user=request.user)
         except CartItem.DoesNotExist:
-            return redirect('cart')
+            return redirect('cart_page')
 
         if action == "increase":
             item.quantity += 1

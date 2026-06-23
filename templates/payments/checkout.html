@@ -12,10 +12,11 @@
         }
 
         .razorpay-payment-button {
-            background-color: black;
+            background-color: rgb(36, 211, 36);
             color: yellow;
             border: none;
             border-radius: 5px;
+            padding: 5px;
         }
 
         .checkout-card {
@@ -89,7 +90,7 @@
                         data-amount="{{ razorpay_order.amount }}"
                         data-currency="{{ razorpay_order.currency }}"
                         data-order_id="{{ razorpay_order.id }}"
-                        data-buttontext="Pay ₹{{ order.total_amount }}"
+                        data-buttontext="Pay Now"
                         data-name="My Shopping Site"
                         data-description="Secure Payment"
                         data-theme.color="#212529">

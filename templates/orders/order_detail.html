@@ -66,7 +66,7 @@ Order Details - Order #{{ order.id }}
                     {% for detail in order.order_details.all %}
                     <tr>
                         <td>
-                            <a href="{% url 'product_details' detail.order_item.id %}">
+                            <a href="{% url 'product_details' detail.order_item.id %}" class="text-decoration-none text-dark" >
                                 {{ detail.order_item.title }}
                             </a>
                         </td>
