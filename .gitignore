@@ -5,9 +5,10 @@ virt/
 .env
 
 # Django project folders
-migrations/
+
 media/
 __pycache__/
+staticfiles/
 
 *.pyc 
 *.pyo
