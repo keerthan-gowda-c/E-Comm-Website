@@ -27,7 +27,7 @@ environ.Env.read_env(BASE_DIR/".env")
 SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool("DEBUG",default=False)
+DEBUG=env.bool("DEBUG",default=False)
 
 if not DEBUG and "RENDER" in os.environ:
     SECURE_SSL_REDIRECT = True
@@ -39,12 +39,12 @@ if not DEBUG and "RENDER" in os.environ:
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
 
-
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS",default=["localhost","127.0.0.1"])
 CSRF_TRUSTED_ORIGINS = env.list(
     "CSRF_TRUSTED_ORIGINS",
     default=[]
 )
+
 
 # Application definition
 
@@ -150,7 +150,6 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR/ 'static'
 ]
-
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 STORAGES = {
@@ -162,8 +161,9 @@ STORAGES = {
     }
 }
 
+
 MEDIA_ROOT = BASE_DIR /'media'
-MEDIA_URL = '/'
+MEDIA_URL = '/media/'
 
 
 
