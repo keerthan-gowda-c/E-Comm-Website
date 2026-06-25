@@ -60,7 +60,9 @@ INSTALLED_APPS = [
     'authentication',
     'cart',
     'orders',
-    'payments'
+    'payments',
+    "cloudinary",
+    "cloudinary_storage",
 ]
 
 MIDDLEWARE = [
@@ -150,20 +152,15 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR/ 'static'
 ]
-STATIC_ROOT = BASE_DIR / "staticfiles"
-
-STORAGES = {
-    "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
-    },
-    "staticfiles":{
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    }
-}
 
 
-MEDIA_ROOT = BASE_DIR /'media'
-MEDIA_URL = '/media/'
+import cloudinary
+
+cloudinary.config(
+    cloud_name=env("CLOUDINARY_CLOUD_NAME"),
+    api_key=env("CLOUDINARY_API_KEY"),
+    api_secret=env("CLOUDINARY_API_SECRET"),
+)
 
 
 
